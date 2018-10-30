@@ -60,7 +60,6 @@ export default [
             routes: [
               {
                 path: '/form/step-form',
-                name: 'stepform',
                 redirect: '/form/step-form/info',
               },
               {
@@ -253,6 +252,18 @@ export default [
                 component: './Account/Settings/NotificationView',
               },
             ],
+          },
+        ],
+      },
+      {
+        path: '/users',
+        name: 'Users',
+        icon: 'team',
+        routes: [
+          {
+            path: '/users/usersList',
+            name: 'usersList',
+            component: './Users/UsersList',
           },
         ],
       },

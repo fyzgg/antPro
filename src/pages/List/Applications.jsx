@@ -159,9 +159,11 @@ class FilterCardList extends PureComponent {
                   <Tooltip title="分享">
                     <Icon type="share-alt" />
                   </Tooltip>,
-                  <Dropdown overlay={itemMenu}>
-                    <Icon type="ellipsis" />
-                  </Dropdown>,
+                  <Tooltip title="">
+                    <Dropdown overlay={itemMenu}>
+                      <Icon type="ellipsis" />
+                    </Dropdown>
+                  </Tooltip>,
                 ]}
               >
                 <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />

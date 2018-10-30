@@ -32,10 +32,12 @@ const RadioGroup = Radio.Group;
 const SelectOption = Select.Option;
 const { Search, TextArea } = Input;
 
-@connect(({ list, loading }) => ({
-  list,
-  loading: loading.models.list,
-}))
+@connect(({ list, loading }) => {
+  return {
+    list,
+    loading: loading.models.list,
+  };
+})
 @Form.create()
 class BasicList extends PureComponent {
   state = { visible: false, done: false };

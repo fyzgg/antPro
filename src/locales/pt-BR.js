@@ -239,4 +239,6 @@ export default {
     'copiado com sucesso，por favor trocar o defaultSettings em src/models/setting.js',
   'app.setting.production.hint':
     'O painel de configuração apenas é exibido no ambiente de desenvolvimento, por favor modifique manualmente o',
+  'menu.Users': 'Gerenciamento de usuários',
+  'menu.Users.usersList': 'Lista de usuários',
 };
