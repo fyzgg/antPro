@@ -21,7 +21,7 @@ import {
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Result from '@/components/Result';
 import UsersModal from './UsersModal';
-import styles from './UsersList.css';
+import styles from './UsersList.less';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -168,15 +168,15 @@ class UsersList extends PureComponent {
   renderSimpleForm = () => {
     const { getFieldDecorator } = this.props.form;
     const formLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 18 },
+      labelCol: { span: 7 },
+      wrapperCol: { span: 13 },
     };
     return (
-      <Form>
+      <Form layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
             <FormItem {...formLayout} label="用户名">
-              {getFieldDecorator('username')(<Input placeholder="请输入" />)}
+              {getFieldDecorator('username')(<Input placeholder="请输入" style={{ width: '100%' }} />)}
             </FormItem>
           </Col>
           <Col md={8} sm={24}>
@@ -218,7 +218,7 @@ class UsersList extends PureComponent {
       <Form>
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem {...formLayout} label="用户名">
+            <FormItem {...formLayout} label="用&nbsp;&nbsp;户&nbsp;&nbsp;名">
               {getFieldDecorator('username')(<Input placeholder="请输入" />)}
             </FormItem>
           </Col>
@@ -364,37 +364,39 @@ class UsersList extends PureComponent {
           style={{ marginTop: 24 }}
           bodyStyle={{ padding: '32px 32px 40px 32px' }}
         >
-          <div style={{ marginBottom: 16 }}>{this.renderForm()}</div>
-          <div style={{ marginBottom: 16 }}>
-            <UsersModal
-              record={{}}
-              title="新增用户"
-              residences={residences}
-              onOk={this.createHandler}
-            >
-              <Button icon="plus" type="primary">
-                新增
-              </Button>
-            </UsersModal>
-            {hasSelected && (
-              <span style={{ marginLeft: 8 }}>
-                <Button type="danger" onClick={this.confirmDeleteHandler}>
-                  批量删除
+          <div className={styles.tableList}>
+            <div className={styles.tableListForm}>{this.renderForm()}</div>
+            <div style={{ marginBottom: 16 }}>
+              <UsersModal
+                record={{}}
+                title="新增用户"
+                residences={residences}
+                onOk={this.createHandler}
+              >
+                <Button icon="plus" type="primary">
+                  新增
                 </Button>
-                <span style={{ marginLeft: 8 }}>已选 {selectedRowKeys.length} 项</span>
-              </span>
-            )}
+              </UsersModal>
+              {hasSelected && (
+                <span style={{ marginLeft: 8 }}>
+                  <Button type="danger" onClick={this.confirmDeleteHandler}>
+                    批量删除
+                  </Button>
+                  <span style={{ marginLeft: 8 }}>已选 {selectedRowKeys.length} 项</span>
+                </span>
+              )}
+            </div>
+            <Table
+              rowSelection={rowSelection}
+              dataSource={list}
+              columns={columns}
+              rowKey={record => record.id}
+              pagination={pagination}
+              size="middle"
+              loading={loading}
+              onChange={this.handleTableChange}
+            />
           </div>
-          <Table
-            rowSelection={rowSelection}
-            dataSource={list}
-            columns={columns}
-            rowKey={record => record.id}
-            pagination={pagination}
-            size="middle"
-            loading={loading}
-            onChange={this.handleTableChange}
-          />
         </Card>
       </PageHeaderWrapper>
     );

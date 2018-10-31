@@ -1,35 +1,35 @@
-import requist from '@/utils/request';
+import request from '@/utils/request';
 
 export async function fecth({ page, filters }) {
-  return requist(`/api/users`, {
+  return request(`/api/users`, {
     method: 'POST',
     body: { page, ...filters },
   });
 }
 export async function removeByBatch({ ids }) {
-  return requist(`/api/users/removeByBatch`, {
+  return request(`/api/users/removeByBatch`, {
     method: 'POST',
     body: { ids },
   });
 }
 export async function remove({ id }) {
-  return requist(`/api/users/remove`, {
+  return request(`/api/users/remove`, {
     method: 'POST',
     body: { id },
   });
 }
 export async function getDept() {
-  return requist(`/api/getDept`);
+  return request(`/api/getDept`);
 }
 export async function create({ data }) {
-  return requist(`/api/users/create`, {
+  return request(`/api/users/create`, {
     method: 'POST',
     body: { ...data },
   });
 }
 export async function update({ data }) {
   console.log({ data });
-  return requist(`/api/users/update`, {
+  return request(`/api/users/update`, {
     method: 'POST',
     body: { ...data },
   });

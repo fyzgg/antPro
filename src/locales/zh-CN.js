@@ -284,4 +284,6 @@ export default {
     '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件',
   'menu.Users': '用户管理',
   'menu.Users.usersList': '用户列表',
+  'menu.weather': '天气',
+  'menu.weather.Weatherinfo': '天气情况',
 };

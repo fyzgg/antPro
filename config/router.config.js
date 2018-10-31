@@ -268,6 +268,18 @@ export default [
         ],
       },
       {
+        path: '/weather',
+        name: 'weather',
+        icon: 'team', 
+        routes: [
+          {
+            path: '/weather/weatherinfo',
+            name: 'Weatherinfo',
+            component: './Weather/Weather'
+          }
+        ]
+      },
+      {
         component: '404',
       },
     ],
