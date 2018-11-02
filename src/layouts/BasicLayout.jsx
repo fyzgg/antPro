@@ -17,9 +17,23 @@ import Footer from './Footer';
 import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
+import cookies from 'js-cookie';
 
 const { Content } = Layout;
 
+function verifyAuth (authority) {
+  if (!authority) return true;
+  const auth = eval('('+cookies.get('auth',{ path:'/' })+')');
+  console.log(auth)
+  console.log(authority)
+  let flag = false;
+  for (let i = 0; i < auth.length; i++) {
+    flag = authority.includes(auth[i]);
+    if (flag) break;
+  }
+  console.log(flag)
+  return flag;
+}
 // Conversion router to menu.
 function formatter(data, parentAuthority, parentName) {
   return data
@@ -27,14 +41,16 @@ function formatter(data, parentAuthority, parentName) {
       if (!item.name || !item.path) {
         return null;
       }
-
+      //如果没有账号权限就不显示了
+      /*if (!verifyAuth(item.authority)) {
+        return null;
+      }*/
       let locale = 'menu';
       if (parentName) {
         locale = `${parentName}.${item.name}`;
       } else {
         locale = `menu.${item.name}`;
       }
-
       const result = {
         ...item,
         name: formatMessage({ id: locale, defaultMessage: item.name }),
@@ -101,6 +117,9 @@ class BasicLayout extends React.PureComponent {
     });
     dispatch({
       type: 'setting/getSetting',
+    });
+    dispatch({
+      type: 'user/fetchRoutes',
     });
     this.renderRef = requestAnimationFrame(() => {
       this.setState({
@@ -230,8 +249,10 @@ class BasicLayout extends React.PureComponent {
       layout: PropsLayout,
       children,
       location: { pathname },
+      routes
     } = this.props;
     const { isMobile, menuData } = this.state;
+    //const menuData = memoizeOneFormatter(routes);
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
@@ -289,8 +310,9 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ global, setting }) => ({
+export default connect(({ global, setting, user }) => ({
   collapsed: global.collapsed,
   layout: setting.layout,
   ...setting,
+  routes:user.routes
 }))(BasicLayout);

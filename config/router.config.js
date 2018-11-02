@@ -259,6 +259,7 @@ export default [
         path: '/users',
         name: 'Users',
         icon: 'team',
+        authority: ['admin'],
         routes: [
           {
             path: '/users/usersList',
@@ -267,21 +268,11 @@ export default [
           },
         ],
       },
-      {
-        path: '/weather',
-        name: 'weather',
-        icon: 'team', 
-        routes: [
-          {
-            path: '/weather/weatherinfo',
-            name: 'Weatherinfo',
-            component: './Weather/Weather'
-          }
-        ]
-      },
-      {
-        component: '404',
-      },
+
     ],
+  },
+  {
+    path:'*',
+    component: '404',
   },
 ];

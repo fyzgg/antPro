@@ -7,3 +7,8 @@ export async function query() {
 export async function queryCurrent() {
   return request('/api/currentUser');
 }
+
+export async function queryRoutes() {
+  console.log('/api/menuData')
+  return request('/api/menuData');
+}

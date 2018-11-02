@@ -3,7 +3,7 @@ import { notification } from 'antd';
 import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
-
+import cookies from 'js-cookie';
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -75,6 +75,16 @@ export default function request(
    * Produce fingerprints based on url and parameters
    * Maybe url has the same parameters
    */
+  const flag = /(\/login)|(\/register)/i.test(url)
+  if (!flag) {
+    const token = cookies.get('token');
+    if (!token) router.push('/user');
+    options.headers = {
+     ...options.headers, Token:token
+    } 
+  }
+  
+
   const fingerprint = url + (options.body ? JSON.stringify(options.body) : '');
   const hashcode = hash
     .sha256()
@@ -121,6 +131,9 @@ export default function request(
       sessionStorage.removeItem(`${hashcode}:timestamp`);
     }
   }
+
+
+
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => cachedSave(response, hashcode))

@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent } from '@/services/user';
+import { query as queryUsers, queryCurrent, queryRoutes } from '@/services/user';
 
 export default {
   namespace: 'user',
@@ -6,6 +6,7 @@ export default {
   state: {
     list: [],
     currentUser: {},
+    routes:[]
   },
 
   effects: {
@@ -23,6 +24,13 @@ export default {
         payload: response,
       });
     },
+    *fetchRoutes({ payload },{ call, put }){
+      const response = yield call(queryRoutes);
+      yield put({
+        type:'saveMenuData',
+        payload: response.data
+      })
+    }
   },
 
   reducers: {
@@ -47,5 +55,16 @@ export default {
         },
       };
     },
+    saveMenuData(state,action){
+      console.log(
+        {
+        ...state,
+        routes:action.payload || {}
+      })
+      return {
+        ...state,
+        routes:action.payload || {}
+      }
+    }
   },
 };
