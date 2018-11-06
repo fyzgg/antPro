@@ -104,6 +104,8 @@ class BasicLayout extends React.PureComponent {
   state = {
     rendering: true,
     isMobile: false,
+    menuData: this.getMenuData(),
+    currentMenuData: this.getCurrentMenuData(),
   };
   componentDidMount() {
     const { dispatch } = this.props;
@@ -136,6 +138,9 @@ class BasicLayout extends React.PureComponent {
     if (isMobile && !preProps.isMobile && !collapsed) {
       this.handleMenuCollapse(false);
     }
+    this.setState({
+      currentMenuData : this.getCurrentMenuData()
+    })
   }
   componentWillUnmount() {
     cancelAnimationFrame(this.renderRef);
@@ -251,8 +256,7 @@ class BasicLayout extends React.PureComponent {
       location: { pathname },
       routes
     } = this.props;
-    const { isMobile, menuData, currentMenu } = this.state;
-    const currentMenuData = this.getCurrentMenuData();
+    const { isMobile, menuData, currentMenu, currentMenuData } = this.state;
     const isTop = PropsLayout === 'topmenu';
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (

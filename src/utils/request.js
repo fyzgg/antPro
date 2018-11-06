@@ -4,6 +4,7 @@ import router from 'umi/router';
 import hash from 'hash.js';
 import { isAntdPro } from './utils';
 import cookies from 'js-cookie';
+import NProgress from 'nprogress';
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -23,6 +24,7 @@ const codeMessage = {
 };
 
 const checkStatus = response => {
+  NProgress.set(0.8);
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -63,10 +65,10 @@ const cachedSave = (response, hashcode) => {
  * @param  {object} [option] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(
-  url,
-  option,
-) {
+export default function request(url,option,) {
+
+  NProgress.start();
+
   const options = {
     expirys: isAntdPro(),
     ...option,
@@ -132,12 +134,11 @@ export default function request(
     }
   }
 
-
-
   return fetch(url, newOptions)
     .then(checkStatus)
     .then(response => cachedSave(response, hashcode))
     .then(response => {
+      NProgress.done();
       // DELETE and 204 do not return data by default
       // using .json will report an error.
       if (newOptions.method === 'DELETE' || response.status === 204) {
@@ -146,6 +147,7 @@ export default function request(
       return response.json();
     })
     .catch(e => {
+      NProgress.done();
       const status = e.name;
       if (status === 401) {
         // @HACK

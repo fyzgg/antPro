@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Layout } from 'antd';
+import { Layout, Dropdown, Menu } from 'antd';
 import pathToRegexp from 'path-to-regexp';
 import classNames from 'classnames';
 import Link from 'umi/link';
@@ -55,6 +55,7 @@ export default class SiderMenu extends PureComponent {
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: getDefaultCollapsedSubMenus(props),
+      currentMenu:'Ant Design Base'
     };
   }
 
@@ -85,16 +86,32 @@ export default class SiderMenu extends PureComponent {
       openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
     });
   };
+  menuChangeHandler = key => {
+    this.setState({
+      currentMenu: key
+    })
+  } 
 
   render() {
     const { logo, collapsed, onCollapse, fixSiderbar, theme } = this.props;
-    const { openKeys } = this.state;
+    const { currentMenu, openKeys } = this.state;
+    //const openKeys = getDefaultCollapsedSubMenus(this.props);
     const defaultProps = collapsed ? {} : { openKeys };
 
     const siderClassName = classNames(styles.sider, {
       [styles.fixSiderbar]: fixSiderbar,
       [styles.light]: theme === 'light',
-    });
+    });    
+    const menu = (
+      <Menu >
+        <Menu.Item key="Ant Design Base">
+          <Link to="/base/dashboard/analysis">Ant Design Base</Link>
+        </Menu.Item>
+        <Menu.Item key="Ant Design Other">
+          <Link to="/other/result/success">Ant Design Other</Link>
+        </Menu.Item>
+      </Menu>
+    )
 
     return (
       <Sider
@@ -108,10 +125,10 @@ export default class SiderMenu extends PureComponent {
         className={siderClassName}
       >
         <div className={styles.logo} id="logo">
-          <Link to="/">
-            <img src={logo} alt="logo" />
-            <h1>Ant Design</h1>
-          </Link>
+          <img src={logo} alt="logo" />
+          <Dropdown overlay={menu}>
+            <h1>{currentMenu}</h1>
+          </Dropdown>
         </div>
         <BaseMenu
           {...this.props}

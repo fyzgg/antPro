@@ -162,6 +162,7 @@ export default class BaseMenu extends PureComponent {
   };
 
   render() {
+    console.log(this.props)
     const {
       openKeys,
       theme,

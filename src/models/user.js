@@ -24,13 +24,13 @@ export default {
         payload: response,
       });
     },
-    *fetchRoutes({ payload },{ call, put }){
+    /**fetchRoutes({ payload },{ call, put }){
       const response = yield call(queryRoutes);
       yield put({
         type:'saveMenuData',
         payload: response.data
       })
-    }
+    }*/
   },
 
   reducers: {
@@ -55,16 +55,11 @@ export default {
         },
       };
     },
-    saveMenuData(state,action){
-      console.log(
-        {
-        ...state,
-        routes:action.payload || {}
-      })
+    /*saveMenuData(state,action){
       return {
         ...state,
         routes:action.payload || {}
       }
-    }
+    }*/
   },
 };
