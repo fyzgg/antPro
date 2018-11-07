@@ -312,6 +312,12 @@ export default [
               },
             ],
           },
+          {
+            name: 'myComponents',
+            icon: 'plus-square',
+            path: '/other/myComponents',
+            component: './MyComponents/MyComponents',
+          },
         ]
       },  
     ],

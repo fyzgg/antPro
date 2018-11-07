@@ -109,6 +109,7 @@ export default {
   'menu.other.exception.not-find': '404',
   'menu.other.exception.server-error': '500',
   'menu.other.exception.trigger': '触发错误',
+  'menu.other.myComponents': '我的组件',
   'app.login.message-invalid-credentials': '账户或密码错误（admin/888888）',
   'app.login.message-invalid-verification-code': '验证码错误',
   'app.login.tab-login-credentials': '账户密码登录',
