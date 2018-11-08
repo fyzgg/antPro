@@ -113,9 +113,15 @@ class MyComponents extends Component {
             />
           </Col>
           <Col xs={24}>
-            <Card>
-              <PhotoZoomIn {...photo} />
-            </Card>
+              <Card>
+                <div className={styles.photos}>
+                  <PhotoZoomIn {...photo} type="1"/>
+                  <PhotoZoomIn {...photo} type="2"/>
+                  <PhotoZoomIn {...photo} type="3"/>
+                  <PhotoZoomIn {...photo} type="4"/>
+                  <PhotoZoomIn {...photo} type="5"/>
+                </div>  
+              </Card>
           </Col>
         </Row>
       </PageHeaderWrapper>

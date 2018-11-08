@@ -11,25 +11,37 @@ class PhotoZoomIn extends PureComponent {
     }
   }
   renderLinks = (links) => {
-    let lis = '';
-    links.forEach( (item, index) => {
-      lis += <li><a href="javascript:;" onClick={this.clickHandler.bind(null,{fn:item.fn})} ><Icom type={item.icon}/></a></li>;
+    return links.map( (item) => {
+      return (
+        <li key={item.id}>
+          <a href="javascript:;" onClick={this.clickHandler.bind(null,{fn: item.fn})} >
+            <Icon type={item.icon}/>
+          </a>
+        </li>
+        );
     });
-    return lis;
   }
   render() {
-    const { title, post, img, links } = this.props;
+    const { title, post, img, links, type, width, height  } = this.props;
+    const box = 'box'+type;
     
     return(
-      <div className={styles["box"]}>
-        <img src={img} alt="" />
+      <div className={styles[box]}>
+        <img src={img} alt="" width={width || '100%' } height={height||'auto'}/>
+        {type=='4' && <ul className={styles["icon"]}>
+          {links && this.renderLinks(links)}
+        </ul>}
         <div className={styles["box-content"]}>
           <div className={styles["content"]}>
             <h3 className={styles["title"]}>{title}</h3>
             <span className={styles["post"]}>{post}</span>
-            <ul className={styles["icon"]}>
+            {
+              type != '4' && 
+              <ul className={styles["icon"]}>
               {links && this.renderLinks(links)}
             </ul>
+            }
+            
           </div>
         </div>
       </div>
