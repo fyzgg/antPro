@@ -313,10 +313,27 @@ export default [
             ],
           },
           {
-            name: 'myComponents',
+            name: 'components',
             icon: 'plus-square',
-            path: '/other/myComponents',
-            component: './MyComponents/MyComponents',
+            path: '/other/components',
+            routes: [
+              {path:'/other/components', redirect:'/other/components/myComponents' },
+              {
+                name: 'myComponents',
+                path: '/other/components/myComponents',
+                component: './MyComponents/MyComponents'
+              },
+              {
+                name: 'editor',
+                path: '/other/components/editor',
+                component: './MyComponents/Editor'
+              },
+              {
+                name: 'others',
+                path: '/other/components/others',
+                component: './MyComponents/Others'
+              }
+            ]
           },
         ]
       },  

@@ -18,6 +18,7 @@ import Header from './Header';
 import Context from './MenuContext';
 import Exception403 from '../pages/Exception/403';
 import cookies from 'js-cookie';
+import { BackTop } from 'antd';
 
 const { Content } = Layout;
 
@@ -257,6 +258,7 @@ class BasicLayout extends React.PureComponent {
     const routerConfig = this.matchParamsPath(pathname);
     const layout = (
       <Layout>
+        <BackTop />
         {isTop && !isMobile ? null : (
           <SiderMenu
             logo={logo}
