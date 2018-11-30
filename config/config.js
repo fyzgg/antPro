@@ -98,7 +98,7 @@ export default {
     basePath:"/"
   },
 
-  chainWebpack: webpackPlugin,
+  //chainWebpack: webpackPlugin,
   cssnano: {
     mergeRules: false,
   },

@@ -11,6 +11,11 @@ export default [
       { component: '404', }
     ],
   },
+  {
+    path: '/home' ,
+    name: 'home',
+    component: './Home/'
+  },
   // app
   {
     path: '/',
@@ -46,9 +51,6 @@ export default [
                 path: '/base/dashboard/workplace',
                 name: 'workplace',
                 component: './Dashboard/Workplace',
-              },
-              {
-                component: '404',
               }
             ],
           },
@@ -87,9 +89,6 @@ export default [
                     path: '/base/form/step-form/result',
                     name: 'result',
                     component: './Forms/StepForm/Step3',
-                  },
-                  {
-                    component: '404',
                   }
                 ],
               },
@@ -98,9 +97,6 @@ export default [
                 name: 'advancedform',
                 authority: ['admin'],
                 component: './Forms/AdvancedForm',
-              },
-              {
-                component: '404',
               }
             ],
           },
@@ -148,14 +144,8 @@ export default [
                     path: '/base/list/search/applications',
                     name: 'applications',
                     component: './List/Applications',
-                  },
-                  {
-                    component: '404',
                   }
                 ],
-              },
-              {
-                component: '404',
               }
             ],
           },
@@ -175,9 +165,6 @@ export default [
                 name: 'advanced',
                 authority: ['admin'],
                 component: './Profile/AdvancedProfile',
-              },
-              {
-                component: '404',
               }
             ],
           },
@@ -236,9 +223,6 @@ export default [
                     component: './Account/Settings/NotificationView',
                   },
                 ],
-              },
-              {
-                component: '404',
               }
             ],
           },
@@ -252,14 +236,8 @@ export default [
                 path: '/base/users/usersList',
                 name: 'usersList',
                 component: './Users/UsersList',
-              },
-              {
-                component: '404',
               }
             ],
-          },
-          {
-            component: '404',
           }
         ],
       },
